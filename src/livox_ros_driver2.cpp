@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
   int xfer_format = kPointCloud2Msg;
   int multi_topic = 0;
   int data_src = kSourceRawLidar;
-  double publish_freq  = 10.0; /* Hz */
+  double publish_freq  = 200.0; /* Hz */
   int output_type      = kOutputToRos;
   std::string frame_id = "livox_frame";
   bool lidar_bag = true;
@@ -63,7 +63,6 @@ int main(int argc, char **argv) {
   livox_node.GetNode().getParam("xfer_format", xfer_format);
   livox_node.GetNode().getParam("multi_topic", multi_topic);
   livox_node.GetNode().getParam("data_src", data_src);
-  livox_node.GetNode().getParam("publish_freq", publish_freq);
   livox_node.GetNode().getParam("output_data_type", output_type);
   livox_node.GetNode().getParam("frame_id", frame_id);
   livox_node.GetNode().getParam("enable_lidar_bag", lidar_bag);
@@ -72,7 +71,7 @@ int main(int argc, char **argv) {
   printf("data source:%u.\n", data_src);
 
   if (publish_freq > 100.0) {
-    publish_freq = 100.0;
+    publish_freq = 200.0;
   } else if (publish_freq < 0.5) {
     publish_freq = 0.5;
   } else {
@@ -131,7 +130,7 @@ DriverNode::DriverNode(const rclcpp::NodeOptions & node_options)
   this->declare_parameter("xfer_format", xfer_format);
   this->declare_parameter("multi_topic", 0);
   this->declare_parameter("data_src", data_src);
-  this->declare_parameter("publish_freq", 10.0);
+  this->declare_parameter("publish_freq", 100.0);
   this->declare_parameter("output_data_type", output_type);
   this->declare_parameter("frame_id", "frame_default");
   this->declare_parameter("user_config_path", "path_default");
